@@ -6,25 +6,28 @@ import {NavigationContainer} from '@react-navigation/native';
 import theme from './src/utils/theme';
 import {Provider} from 'react-redux';
 import store from './src/store/index';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 const Stack = createNativeStackNavigator();
 
 const App = () => (
   <Provider store={store}>
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="CryptoList"
-          component={CryptoList}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="AddCrypto"
-          component={AddCrypto}
-          options={{headerShown: false}}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+     <GestureHandlerRootView style={{ flex: 1 }}> 
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="CryptoList"
+            component={CryptoList}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="AddCrypto"
+            component={AddCrypto}
+            options={{headerShown: false}}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+     </GestureHandlerRootView> 
   </Provider>
 );
 export default App;

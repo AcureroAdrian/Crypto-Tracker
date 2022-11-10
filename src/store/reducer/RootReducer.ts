@@ -13,7 +13,7 @@ export const getCrypto = createAsyncThunk(
   async (name: string) => {
     try {
       const {data, status} = await fetch(
-        `${process.env.REACT_APP_BASE_URL}${name}/metrics?fields=${process.env.FIELDS}`,
+        `https://data.messari.io/api/v1/assets/${name}/metrics?fields=name,id,slug,symbol,market_data/price_usd,market_data/percent_change_usd_last_24_hours`,
       ).then(res => res.json());
 
       if(status.error_code === 404) 
@@ -32,20 +32,16 @@ export const updateCrypto = createAsyncThunk(
   'crypto/updateCrypto',
   async (slugs: string[]) => {
     const value: Crypto[] = [];
-
       
-
       for (let i = 0; i < slugs.length; i++) {
         const response = await fetch(
-          `${process.env.REACT_APP_BASE_URL}${slugs[i]}/metrics?fields=${process.env.FIELDS}`,
+          `https://data.messari.io/api/v1/assets/${slugs}/metrics?fields=name,id,slug,symbol,market_data/price_usd,market_data/percent_change_usd_last_24_hours`,
         ).then(res => res.json())
 
         if (response.status.error_code) throw 'Limit'
 
         value.push(response.data);
       }
-
-    
 
     return value;
   },
@@ -55,7 +51,12 @@ export const updateCrypto = createAsyncThunk(
 const cryptoSlice = createSlice({
   name: 'crypto',
   initialState,
-  reducers: {},
+  reducers: {
+    remove: (state, {payload}) => {
+      console.log(payload)
+      state.cryptos = state.cryptos.filter(e => e.id !== payload)
+    }
+  },
   extraReducers(builder) {
     builder
       .addCase(getCrypto.pending, state => {
@@ -77,5 +78,7 @@ const cryptoSlice = createSlice({
       });
   },
 });
+
+export const { remove } = cryptoSlice.actions;
 
 export default cryptoSlice.reducer;

@@ -1,4 +1,4 @@
-import {TouchableOpacity, FlatList} from 'react-native';
+import {TouchableOpacity, FlatList, Text, View} from 'react-native';
 import {BlueText, Container, ContainerFlatList} from './style';
 import CryptoItem from '../../components/cryptoItem/Index';
 import React, {useEffect} from 'react';
@@ -15,6 +15,7 @@ type Nav = {
 const CryptoList = () => {
   const {navigate} = useNavigation<Nav>();
   const dispatch = useDispatch<AppDispatch>();
+
   const cryptos = useSelector(
     (state: RootState) => state.selectedCrypto.cryptos,
   );
@@ -22,24 +23,26 @@ const CryptoList = () => {
   useEffect(() => {
     const time = setInterval(() => {
       dispatch(updateCrypto(cryptos.map(c => c.slug)));
-    }, 8000);
+    }, 50000); //CAMBIAR A 8000 !!!!!!!
     return () => clearInterval(time);
-  });
+  }); 
+
 
   return (
-    <Container>
+    <Container >
       <Header />
       <ContainerFlatList>
-        <FlatList
-          data={cryptos}
-          keyExtractor={item => item?.id}
-          renderItem={({item}) => <CryptoItem crypto={item} />}
-          ListFooterComponent={
-            <TouchableOpacity onPress={() => navigate('AddCrypto')}>
-              <BlueText>+ Add a Cryptocurrency</BlueText>
-            </TouchableOpacity>
-          }
-        />
+
+            <FlatList
+              data={cryptos}
+              keyExtractor={item => item?.id}
+              renderItem={({item}) => <CryptoItem crypto={item} />}
+              ListFooterComponent={
+                <TouchableOpacity onPress={() => navigate('AddCrypto')}>
+                  <BlueText>+ Add a Cryptocurrency</BlueText>
+                </TouchableOpacity>
+              }
+            />
       </ContainerFlatList>
     </Container>
   );

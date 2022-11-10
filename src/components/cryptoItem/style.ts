@@ -2,19 +2,19 @@ import styled from 'styled-components/native';
 import theme from '../../utils/theme';
 
 export const Container = styled.TouchableOpacity`
-  padding-top: 28px;
-  padding-bottom: 10px;
+  padding: 28px 25px 10px 23px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   border-bottom-color: ${theme.colors.black};
-`;
+  `;
 
 export const Separator = styled.View`
   height: 1px;
-  width: 100%;
+  width: 90%;
   margin-top: 11px;
+  align-self: center;
   background-color: ${theme.colors.dividerGray};
 `;
 
@@ -31,7 +31,7 @@ export const NamesContainer = styled.View`
 export const Name = styled.Text`
   color: ${theme.colors.black};
   font-size: 17px;
-  font-weight: 500;
+  font-weight: 500px;
 `;
 
 export const Symbol = styled.Text`
@@ -50,7 +50,7 @@ export const ValueContainer = styled.View`
 
 export const Value = styled.Text`
   font-size: 19px;
-  font-weight: 500;
+  font-weight: 500px;
   color: ${theme.colors.black};
   text-align: right;
 `;
@@ -73,3 +73,13 @@ export const Percent = styled.Text`
   font-size: 16px;
   color: ${({percent}: {percent: boolean}) => (percent ? 'red' : 'green')};
 `;
+
+export const IconContainer = styled.Text`
+ height: 100%;
+ width: 80px;
+ position: absolute;
+ right: 2px;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+`

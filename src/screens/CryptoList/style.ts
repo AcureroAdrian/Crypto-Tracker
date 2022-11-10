@@ -8,14 +8,12 @@ export const Container = styled.SafeAreaView`
 
 export const ContainerFlatList = styled.View`
   background-color: ${theme.colors.white};
-  margin-left: 23px;
-  margin-right: 25px;
   height: auto;
   max-height: 90%;
 `;
 
 export const BlueText = styled.Text`
-  margin-top: 50px;
+  padding:50px;
   font-size: 18px;
   line-height: 24px;
   background-color: ${theme.colors.blue};
