@@ -2,18 +2,16 @@ import {TouchableOpacity, FlatList, Text, View} from 'react-native';
 import {BlueText, Container, ContainerFlatList} from './style';
 import CryptoItem from '../../components/cryptoItem/Index';
 import React, {useEffect} from 'react';
-import {useNavigation} from '@react-navigation/native';
+import {CompositeNavigationProp, useNavigation} from '@react-navigation/native';
 import Header from '../../components/header/Index';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../../store/index';
 import {updateCrypto} from '../../store/reducer/RootReducer';
+import { ProfileScreenNavigationProp, RootStackScreenProps } from '../../interfaces/Index';
 
-type Nav = {
-  navigate: (value: string) => void;
-};
 
 const CryptoList = () => {
-  const {navigate} = useNavigation<Nav>();
+  const { navigate } = useNavigation<ProfileScreenNavigationProp<'CryptoList'>>();
   const dispatch = useDispatch<AppDispatch>();
 
   const cryptos = useSelector(
@@ -23,7 +21,7 @@ const CryptoList = () => {
   useEffect(() => {
     const time = setInterval(() => {
       dispatch(updateCrypto(cryptos.map(c => c.slug)));
-    }, 50000); //CAMBIAR A 8000 !!!!!!!
+    }, 9000); 
     return () => clearInterval(time);
   }); 
 

@@ -7,8 +7,9 @@ import theme from './src/utils/theme';
 import {Provider} from 'react-redux';
 import store from './src/store/index';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import { RootStackParamList } from './src/interfaces/Index';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const App = () => (
   <Provider store={store}>

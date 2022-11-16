@@ -53,7 +53,6 @@ const cryptoSlice = createSlice({
   initialState,
   reducers: {
     remove: (state, {payload}) => {
-      console.log(payload)
       state.cryptos = state.cryptos.filter(e => e.id !== payload)
     }
   },

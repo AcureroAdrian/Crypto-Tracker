@@ -6,11 +6,12 @@ import {AppDispatch, RootState} from '../../store';
 import theme from '../../utils/theme';
 import {useNavigation} from '@react-navigation/native';
 import {getCrypto} from '../../store/reducer/RootReducer';
+import { ProfileScreenNavigationProp, RootStackScreenProps } from '../../interfaces/Index';
 
 const AddCrypto = () => {
   const [text, onChangeText] = useState('');
   const [borderColor, setBorderColor] = useState(theme.colors.borderGray);
-  const {navigate} = useNavigation();
+  const { navigate } = useNavigation<ProfileScreenNavigationProp<'CryptoList'>>();
 
   const cryptos = useSelector(
     (state: RootState) => state.selectedCrypto.cryptos,

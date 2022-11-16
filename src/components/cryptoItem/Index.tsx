@@ -4,7 +4,9 @@ import decreaseArrow from '../../assets/decreaseArrow.png';
 import IncrementArrow from '../../assets/increaseArrow.png';
 import Icons from 'react-native-vector-icons/MaterialIcons';
 
-import cryptoReducer, {remove} from '../../store/reducer/RootReducer';
+import {remove} from '../../store/reducer/RootReducer';
+
+import { useNavigation } from '@react-navigation/native';
 
 import {
   NamesContainer,
@@ -21,7 +23,7 @@ import {
   ArrowContainer,
 } from './style';
 
-import {Crypto} from '../../interfaces/Index';
+import {Crypto, ProfileScreenNavigationProp, RootStackParamList, RootStackScreenProps} from '../../interfaces/Index';
 
 import {
   PanGestureHandler,
@@ -45,9 +47,11 @@ interface Props {
 const {width: SCREEN_WIDTH} = Dimensions.get('window');
 const TRANSLATE_X_THRESHOLD = -SCREEN_WIDTH * 0.25;
 
-var a = false
+
 const CryptoItem: FC<Props> = ({crypto}) => {
   const dispatch = useDispatch();
+  const { navigate } = useNavigation<ProfileScreenNavigationProp<'CryptoList'>>();
+  
 
   const translateX = useSharedValue(0);
   const itemHeight = useSharedValue(86);
@@ -109,7 +113,7 @@ const CryptoItem: FC<Props> = ({crypto}) => {
       </Animated.View>
       <PanGestureHandler onGestureEvent={panGesture}>
         <Animated.View style={rStyle}>
-          <Container>
+          <Container onPress={() => navigate('CryptoDetail', { id: crypto.id} )}>
             <LogoContainer>
               <Logo
                 source={{
